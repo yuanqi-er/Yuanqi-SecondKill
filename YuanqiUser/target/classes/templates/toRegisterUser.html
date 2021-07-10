@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户查看页面</title>
+</head>
+<body>
+
+<form action="registerUser" method="post">
+    账号：<input th:name="account"/><br>
+    密码：<input th:name="password"/><br>
+    重复输入密码：<input th:name="repassword"/><br>
+    手机号：<input th:name="telphone"/><br>
+    生日：<input th:name="birthday"/><br>
+    qq：<input th:name="qq"/><br>
+    微信：<input th:name="weixin"/><br>
+    <input type="submit" value="提交">
+</form>
+<span th:text="${error}"/>
+</body>
+</html>

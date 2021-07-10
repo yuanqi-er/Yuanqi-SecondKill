@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yuanqi.mapper.UserMapper">
+
+    <select id="findUserById" resultType="com.yuanqi.entity.User" parameterType="int">
+        select *
+        from user
+        where id = #{userId}
+    </select>
+
+    <!--用于注册保存的基本信息-->
+    <insert id="saveUserInfo" parameterType="com.yuanqi.entity.User" keyProperty="id">
+        insert into user(account, originalPassword, encryptionPassword, telphone, birthday, qq, weixin) values(#{account}, #{originalPassword}, #{encryptionPassword}, #{telphone}, #{birthday}, #{qq}, #{weixin})
+    </insert>
+
+    <select id="findUserByAccount" resultType="com.yuanqi.entity.User" parameterType="String">
+        select account,encryptionPassword from user where account = #{account}
+    </select>
+
+</mapper>
