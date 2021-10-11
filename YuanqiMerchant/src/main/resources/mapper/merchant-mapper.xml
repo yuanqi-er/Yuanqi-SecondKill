@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yuanqi.mapper.MerchantMapper">
+
+    <select id="findMerchantById" resultType="com.yuanqi.entity.Merchant" parameterType="int">
+        select *
+        from merchant
+        where id = #{merchantId}
+    </select>
+
+    <!--商家入驻-->
+    <insert id="saveMerchantInfo" parameterType="com.yuanqi.entity.Merchant" keyProperty="id">
+        insert into merchant(account, originalPassword, encryptionPassword, telphone, name, province, city, address, createtime) values(#{account}, #{originalPassword}, #{encryptionPassword}, #{telphone}, #{name}, #{province}, #{city}, #{address}, #{createtime})
+    </insert>
+
+    <select id="findMerchantByAccount" resultType="com.yuanqi.entity.Merchant" parameterType="String">
+        select account,encryptionPassword from merchant where account = #{account}
+    </select>
+
+</mapper>

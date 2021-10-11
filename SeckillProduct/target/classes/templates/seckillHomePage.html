@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>秒杀商品首页</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <td>商品标题</td>
+            <td>商品名称</td>
+            <td>秒杀价格</td>
+            <td>商品价格</td>
+            <td>秒杀数量</td>
+            <td>秒杀库存数量</td>
+            <td>创建时间</td>
+            <td>开始时间</td>
+            <td>结束时间</td>
+            <td>商家id</td>
+        </tr>
+        <tr th:each="entity:${seckillProductsState3}">
+            <td><span th:text="${entity.productTitle}"/> </td>
+            <td><span th:text="${entity.productName}"/> </td>
+            <td><span th:text="${entity.seckillPrice}"/> </td>
+            <td><span th:text="${entity.productPrice}"/> </td>
+            <td><span th:text="${entity.seckillNum}"/> </td>
+            <td><span th:text="${entity.seckillInventory}"/> </td>
+            <td><span th:text="${entity.createTime}"/> </td>
+            <td><span th:text="${entity.startTime}"/> </td>
+            <td><span th:text="${entity.endTime}"/> </td>
+            <td><span th:text="${entity.shopId}"/> </td>
+        </tr>
+    </table>
+
+</body>
+</html>

@@ -11,6 +11,11 @@
         <module>YuanqiRegisterCenter</module>
         <module>YuanqiUser</module>
         <module>YuanqiCommon</module>
+        <module>YuanqiMerchant</module>
+        <module>YuanqiShop</module>
+        <module>ProductType</module>
+        <module>Product</module>
+        <module>SeckillProduct</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yuanqi.mapper.ShopMapper">
+
+    <insert id="saveShopInfo" parameterType="com.yuanqi.entity.Shop" keyProperty="id">
+        insert into shop(merchantId, shopName, shopDescription, shopBusinessScope, province, city, businessLicense, createTime, state)
+        values(#{merchantId}, #{shopName}, #{shopDescription}, #{shopBusinessScope}, #{province}, #{city}, #{businessLicense}, #{createTime}, #{state})
+    </insert>
+
+    <!--通过店铺名称 或 状态找到该店铺信息-->
+    <select id="listShopInfoBy" parameterType="com.yuanqi.vo.ShopVo" resultType="com.yuanqi.entity.Shop">
+        select * from shop
+        <where>
+            <include refid="shopCondition"/>
+        </where>
+    </select>
+    <sql id="shopCondition">
+        <if test="shopCondition != null">
+            <if test="shopCondition.shopName != null and shopCondition.shopName != ''">
+                and shopName like '%${shopName}%'
+            </if>
+            <if test="shopCondition.state != null and shopCondition.state != ''">
+                and state = #{state}
+            </if>
+        </if>
+    </sql>
+
+    <!--更新店铺状态-->
+    <update id="updateInfoBy" parameterType="com.yuanqi.entity.Shop">
+        UPDATE shop SET state = #{state} WHERE id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品查看页面</title>
+</head>
+<body>
+
+    <table border="1">
+        <tr>
+            <td>商品标题</td>
+            <td>商品名称</td>
+            <td>商品价格</td>
+            <td>商品优惠价格</td>
+            <td>商品创建时间</td>
+            <td>商品状态</td>
+            <td>操作</td>
+        </tr>
+        <tr th:each="entity:${listProducts}">
+            <td><span th:text="${entity.productTitle}"/> </td>
+            <td><span th:text="${entity.productName}"/> </td>
+            <td><span th:text="${entity.productPrice}"/> </td>
+            <td><span th:text="${entity.productDiscounts}"/> </td>
+            <td><span th:text="${entity.createTime}"/> </td>
+            <td><span th:text="${entity.state}"/> </td>
+            <td><span th:switch="${entity.state}">
+                    <span th:case="0"><a th:href="@{/product/updateState(id=${entity.id}, state=1)}">审核通过</a> || <a th:href="@{/product/updateState(id=${entity.id}, state=2)}">退回</a></span>
+                    <span th:case="1"><a th:href="@{/product/updateState(id=${entity.id}, state=3)}">上架</a></span>
+                    <span th:case="3"><a th:href="@{/product/updateState(id=${entity.id}, state=3)}">下架</a></span>
+                </span>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

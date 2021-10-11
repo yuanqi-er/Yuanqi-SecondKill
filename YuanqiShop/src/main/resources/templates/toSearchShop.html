@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商铺搜索页面</title>
+</head>
+<body>
+
+<form action="searchShop" method="post">
+    店铺名称：<input th:name="shopName"/><br>
+    状态：<input th:name="state"/><br>
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>

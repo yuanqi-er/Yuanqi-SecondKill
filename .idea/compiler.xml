@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="YuanqiMerchant" />
         <module name="YuanqiRegisterCenter" />
         <module name="YuanqiUser" />
         <module name="YuanqiCommon" />
@@ -18,6 +19,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="YuanqiCommon" options="-parameters" />
+      <module name="YuanqiMerchant" options="-parameters" />
       <module name="YuanqiRegisterCenter" options="-parameters" />
       <module name="YuanqiUser" options="-parameters" />
       <module name="yuanqiUser" options="-parameters" />

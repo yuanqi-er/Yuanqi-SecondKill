@@ -61,11 +61,6 @@
             <artifactId>YuanqiCommon</artifactId>
             <version>1.0</version>
         </dependency>
-        <!--commons-lang3 用于加密-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
     </dependencies>
 
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yuanqi.mapper.ProductMapper">
+
+    <insert id="saveProductInfo" parameterType="com.yuanqi.entity.Product" keyProperty="id">
+        insert into product(productTitle, productName, productPictureUrl, productPrice,productDiscounts,createTime,state,merchantId,productTypeId,productInventory)
+        values(#{productTitle}, #{productName}, #{productPictureUrl}, #{productPrice}, #{productDiscounts}, #{createTime}, #{state}, #{merchantId}, #{productTypeId}, #{productInventory})
+    </insert>
+
+    <select id="listProductInfo" parameterType="com.yuanqi.vo.ProductVo" resultType="com.yuanqi.entity.Product">
+        select * from product
+        <where>
+            <include refid="productCondition"/>
+        </where>
+    </select>
+    <sql id="productCondition">
+        <if test="productCondition != null">
+            <!--添加商品名称的查询条件-->
+            <if test="productCondition.productName != null and productCondition.productName!='' ">
+                and productName like "%${productCondition.productName}%"
+            </if>
+            <!--添加商品状态的查询条件-->
+            <if test="productCondition.state != null and productCondition.state!='' ">
+                and state = "${productCondition.state}"
+            </if>
+            <!--添加商铺id的查询条件-->
+            <if test="productCondition.shopId != null and productCondition.shopId!='' ">
+                and shopId = "${productCondition.shopId}"
+            </if>
+        </if>
+    </sql>
+
+    <!--更新状态-->
+    <update id="updateProductState" parameterType="com.yuanqi.entity.Product">
+        <choose>
+            <when test="approveTime != null">
+                UPDATE product SET state = #{state}, updateTime=#{updateTime}, approveTime=#{approveTime} WHERE id = #{id}
+            </when>
+            <otherwise>
+                UPDATE product SET state = #{state}, updateTime=#{updateTime} WHERE id = #{id}
+            </otherwise>
+        </choose>
+    </update>
+    
+    <!--根据商品id查找商品-->
+    <select id="findProductById" resultType="com.yuanqi.entity.Product" parameterType="int">
+        SELECT * FROM product WHERE id = #{id}
+    </select>
+
+</mapper>

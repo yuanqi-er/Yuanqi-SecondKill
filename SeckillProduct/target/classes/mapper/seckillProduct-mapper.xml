@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yuanqi.mapper.SeckillMapper">
+
+    <insert id="saveSeckillProduct" parameterType="com.yuanqi.entity.SeckillProduct" keyProperty="id">
+        INSERT INTO seckillproduct(productId, seckillNum, seckillPrice, productPrice, seckillInventory, createTime, startTime, endTime, shopId, state, productTitle, productName)
+        VALUES(#{productId}, #{seckillNum}, #{seckillPrice}, #{productPrice}, #{seckillInventory}, #{createTime}, #{startTime}, #{endTime}, #{shopId}, #{state}, #{productTitle}, #{productName})
+    </insert>
+
+    <select id="listSeckillInfo" resultType="com.yuanqi.entity.SeckillProduct" parameterType="com.yuanqi.vo.SeckillProductVo">
+        SELECT * FROM seckillproduct
+        <where>
+            <include refid="SeckillProductCondition"></include>
+        </where>
+    </select>
+    <sql id="SeckillProductCondition">
+        <if test="seckillProductCondition != null">
+            <if test="seckillProductCondition.shopId != null and seckillProductCondition.shopId!=''">
+                AND shopId = "${seckillProductCondition.shopId}"
+            </if>
+            <if test="seckillProductCondition.state != null and seckillProductCondition.state!=''">
+                AND state = "${seckillProductCondition.state}"
+            </if>
+        </if>
+    </sql>
+
+    <update id="updateSeckillProductState" parameterType="com.yuanqi.entity.SeckillProduct">
+        <choose>
+            <when test="approveTime != null">
+                UPDATE seckillproduct SET state = #{state}, approveTime=#{approveTime} WHERE id = #{id}
+            </when>
+            <otherwise>
+                UPDATE seckillproduct SET state = #{state} WHERE id = #{id}
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="findSeckillInfoById" resultType="com.yuanqi.entity.SeckillProduct" parameterType="int">
+        SELECT * FROM seckillproduct WHERE id = #{id}
+
+    </select>
+
+
+    <select id="selectForUpdate" resultType="com.yuanqi.entity.SeckillProduct">
+        SELECT * FROM seckillproduct WHERE id = #{id} FOR UPDATE
+    </select>
+
+
+    <update id="updateSeckillNumById">
+        UPDATE seckillproduct SET seckillNum = #{seckillNum} WHERE id = #{id}
+    </update>
+
+    <update id="updateSeckillNumByVersion">
+        UPDATE seckillproduct SET seckillNum = #{seckillNum}, seckillversion = #{seckillVersion} + 1
+        WHERE id = #{id} and seckillversion = #{seckillVersion}
+    </update>
+
+</mapper>
